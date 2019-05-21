@@ -7,9 +7,9 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-2019'
 
 steps:
 - script: |
-    make -C src/ MINGW=1
+    msbuild src/sdl/Srb2SDL-vc10.vcxproj
   displayName: 'make'
