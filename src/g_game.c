@@ -3173,6 +3173,9 @@ INT16 G_SometimesGetDifferentGametype(void)
 {
 	boolean encorepossible = (M_SecretUnlocked(SECRET_ENCORE) && G_RaceGametype());
 
+	if (cv_kartvoterulechanges.value == 4) // Race/Encore, toggle Encore
+		return gametype ^ 0x80;
+
 	if (!cv_kartvoterulechanges.value) // never
 		return gametype;
 

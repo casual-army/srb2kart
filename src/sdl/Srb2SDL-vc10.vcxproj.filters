@@ -894,6 +894,7 @@
     <ClCompile Include="..\k_kart.c">
       <Filter>D_Doom</Filter>
     </ClCompile>
+    <ClCompile Include="..\apng.c" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Srb2SDL.ico">
