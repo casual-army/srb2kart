@@ -11,5 +11,5 @@ pool:
 
 steps:
 - script: |
-    msbuild src/sdl/Srb2SDL-vc10.vcxproj
+    MSBuild.exe src/sdl/Srb2SDL-vc10.vcxproj
   displayName: 'make'
