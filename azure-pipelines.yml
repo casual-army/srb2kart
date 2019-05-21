@@ -11,5 +11,5 @@ pool:
 
 steps:
 - script: |
-    make -C src/ LINUX=1
+    make -C src/ MINGW=1
   displayName: 'make'
