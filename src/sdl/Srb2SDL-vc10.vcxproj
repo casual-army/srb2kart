@@ -303,6 +303,7 @@
     <ClInclude Include="hwsym_sdl.h" />
     <ClInclude Include="i_ttf.h" />
     <ClInclude Include="ogl_sdl.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="sdlmain.h" />
   </ItemGroup>
   <ItemGroup>
@@ -489,6 +490,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Srb2SDL.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="srb2kart.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
