@@ -2127,8 +2127,10 @@ EXPORT void HWRAPI(PostImgRedraw) (float points[SCREENVERTS][SCREENVERTS][2])
 	INT32 x, y;
 	float float_x, float_y, float_nextx, float_nexty;
 	float xfix, yfix;
-	INT32 texsize = 2048;
+	INT32 texsize = 4096;
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	// Use a power of two texture, dammit
 	if(screen_width <= 1024)
 		texsize = 1024;
@@ -2200,9 +2202,11 @@ EXPORT void HWRAPI(FlushScreenTextures) (void)
 // Create Screen to fade from
 EXPORT void HWRAPI(StartScreenWipe) (void)
 {
-	INT32 texsize = 2048;
+	INT32 texsize = 4096;
 	boolean firstTime = (startScreenWipe == 0);
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	// Use a power of two texture, dammit
 	if(screen_width <= 512)
 		texsize = 512;
@@ -2240,9 +2244,11 @@ EXPORT void HWRAPI(StartScreenWipe) (void)
 // Create Screen to fade to
 EXPORT void HWRAPI(EndScreenWipe)(void)
 {
-	INT32 texsize = 2048;
+		INT32 texsize = 4096;
 	boolean firstTime = (endScreenWipe == 0);
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	// Use a power of two texture, dammit
 	if(screen_width <= 512)
 		texsize = 512;
@@ -2283,8 +2289,11 @@ EXPORT void HWRAPI(EndScreenWipe)(void)
 EXPORT void HWRAPI(DrawIntermissionBG)(void)
 {
 	float xfix, yfix;
-	INT32 texsize = 2048;
 
+	INT32 texsize = 4096;
+
+	if (screen_width <= 2048)
+		texsize = 2048;
 	if(screen_width <= 1024)
 		texsize = 1024;
 	if(screen_width <= 512)
@@ -2323,13 +2332,15 @@ EXPORT void HWRAPI(DrawIntermissionBG)(void)
 // Do screen fades!
 EXPORT void HWRAPI(DoScreenWipe)(float alpha)
 {
-	INT32 texsize = 2048;
+	INT32 texsize = 4096;
 	float xfix, yfix;
 
 #ifndef MINI_GL_COMPATIBILITY
 	INT32 fademaskdownloaded = tex_downloaded; // the fade mask that has been set
 #endif
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	// Use a power of two texture, dammit
 	if(screen_width <= 1024)
 		texsize = 1024;
@@ -2444,9 +2455,11 @@ EXPORT void HWRAPI(DoScreenWipe)(float alpha)
 // Create a texture from the screen.
 EXPORT void HWRAPI(MakeScreenTexture) (void)
 {
-	INT32 texsize = 2048;
+	INT32 texsize = 4096;
 	boolean firstTime = (screentexture == 0);
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	// Use a power of two texture, dammit
 	if(screen_width <= 512)
 		texsize = 512;
@@ -2483,9 +2496,11 @@ EXPORT void HWRAPI(MakeScreenTexture) (void)
 
 EXPORT void HWRAPI(MakeScreenFinalTexture) (void)
 {
-	INT32 texsize = 2048;
+	INT32 texsize = 4096;
 	boolean firstTime = (finalScreenTexture == 0);
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	// Use a power of two texture, dammit
 	if(screen_width <= 512)
 		texsize = 512;
@@ -2527,8 +2542,10 @@ EXPORT void HWRAPI(DrawScreenFinalTexture)(int width, int height)
 	float origaspect, newaspect;
 	float xoff = 1, yoff = 1; // xoffset and yoffset for the polygon to have black bars around the screen
 	FRGBAFloat clearColour;
-	INT32 texsize = 2048;
+	INT32 texsize = 4096;
 
+	if (screen_width <= 2048)
+		texsize = 2048;
 	if(screen_width <= 1024)
 		texsize = 1024;
 	if(screen_width <= 512)

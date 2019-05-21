@@ -146,6 +146,7 @@ static const char *fallback_resolution_name = "Fallback";
 // windowed video modes from which to choose from.
 static INT32 windowedModes[MAXWINMODES][2] =
 {
+	{2560,1440},
 	{1920,1200}, // 1.60,6.00
 	{1920,1080}, // 1.66
 	{1680,1050}, // 1.60,5.25
@@ -162,7 +163,7 @@ static INT32 windowedModes[MAXWINMODES][2] =
 	{ 800, 600}, // 1.33,2.50
 	{ 640, 480}, // 1.33,2.00
 	{ 640, 400}, // 1.60,2.00
-	{ 320, 240}, // 1.33,1.00
+	//{ 320, 240}, // 1.33,1.00
 	{ 320, 200}, // 1.60,1.00
 };
 
