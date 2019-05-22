@@ -157,6 +157,11 @@
       <PreprocessorDefinitions>HAVE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>HAVE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\libs\libpng-src\projects\visualc10\libpng.vcxproj">
       <Project>{72b01aca-7a1a-4f7b-acef-2607299cf052}</Project>
@@ -299,6 +304,7 @@
     <ClInclude Include="hwsym_sdl.h" />
     <ClInclude Include="i_ttf.h" />
     <ClInclude Include="ogl_sdl.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="sdlmain.h" />
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +487,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Srb2SDL.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="srb2kart.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
