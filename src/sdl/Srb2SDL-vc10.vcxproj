@@ -162,19 +162,6 @@
       <PreprocessorDefinitions>HAVE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>HAVE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <PreprocessorDefinitions>HAVE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <CustomBuild>
-      <Command>C:\Users\User\AppData\Local\bin\NASM\nasm -g -o $(IntDir)%(Filename).obj -f win32 "%(FullPath)"</Command>
-    </CustomBuild>
-  </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\libs\libpng-src\projects\visualc10\libpng.vcxproj">
       <Project>{72b01aca-7a1a-4f7b-acef-2607299cf052}</Project>
