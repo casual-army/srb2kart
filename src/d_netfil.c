@@ -276,9 +276,13 @@ boolean CL_CheckDownloadable(void)
   */
 boolean CL_SendRequestFile(void)
 {
-	char *p;
+	char* p;
+	UINT8 cmdbuffer[8][2][MAXTEXTCMD + 1];
+	int n = 0;
 	INT32 i;
 	INT64 totalfreespaceneeded = 0, availablefreespace;
+	UINT8 length = 0;
+	UINT8 totallength = 0;
 
 #ifdef PARANOIA
 	if (M_CheckParm("-nodownload"))
@@ -291,30 +295,70 @@ boolean CL_SendRequestFile(void)
 			I_Error("Attempted to download files that were not sendable");
 		}
 #endif
+	
+	
 
-	netbuffer->packettype = PT_REQUESTFILE;
-	p = (char *)netbuffer->u.textcmd;
+
+
+	p = (char *)cmdbuffer[n][0];
 	for (i = 0; i < fileneedednum; i++)
+	{
+
 		if ((fileneeded[i].status == FS_NOTFOUND || fileneeded[i].status == FS_MD5SUMBAD))
 		{
-			totalfreespaceneeded += fileneeded[i].totalsize;
 			nameonly(fileneeded[i].filename);
+			for (length = 0; fileneeded[i].filename[length] != '\0'; length++);
+
+			if (p + 1 + length >= (char*)cmdbuffer[n][0] + MAXTEXTCMD - 1)
+			{
+				cmdbuffer[n][1][0] = (UINT8)(p - (char*)cmdbuffer[n][0]);
+				CONS_Printf("txtcmd rollover %i total length %i, written %i\n", n, p - (char*)cmdbuffer[n][0], cmdbuffer[n][1][0]);
+
+				p = (char*)cmdbuffer[++n][0];
+			}
+
+			totalfreespaceneeded += fileneeded[i].totalsize;
+			
+			CONS_Printf(M_GetText("Writing %i%s length %i to %i and %i\n"), i, fileneeded[i].filename, 1+length, n, p - (char*)cmdbuffer[n][0]);
+			length = 0;
+
 			WRITEUINT8(p, i); // fileid
 			WRITESTRINGN(p, fileneeded[i].filename, MAX_WADPATH);
 			// put it in download dir
 			strcatbf(fileneeded[i].filename, downloaddir, "/");
 			fileneeded[i].status = FS_REQUESTED;
 		}
-	WRITEUINT8(p, 0xFF);
+	}
+	
+	CONS_Printf("txtcmd end %i total length %i\n", n, p - (char*)cmdbuffer[n][0]);
+	cmdbuffer[n][1][0] = (UINT8)(p - (char*)cmdbuffer[n][0]);
+
 	I_GetDiskFreeSpace(&availablefreespace);
 	if (totalfreespaceneeded > availablefreespace)
 		I_Error("To play on this server you must download %s KB,\n"
 			"but you have only %s KB free space on this drive\n",
 			sizeu1((size_t)(totalfreespaceneeded>>10)), sizeu2((size_t)(availablefreespace>>10)));
 
+	CONS_Printf("After disk check\n");
+
 	// prepare to download
 	I_mkdir(downloaddir, 0755);
-	return HSendPacket(servernode, true, 0, p - (char *)netbuffer->u.textcmd);
+
+	p = (char*)netbuffer->u.textcmd;
+	for (n = 0; (UINT8)cmdbuffer[n][0][1] != (UINT8)0; n++)
+	{
+		netbuffer->packettype = PT_REQUESTFILE;
+
+		length = (UINT8)cmdbuffer[n][1][0];
+
+		CONS_Printf(M_GetText("Right before memcpy. Data: c%s Length: %i\n"), (char*)cmdbuffer[n][0], length);
+		memcpy(p, (char*)cmdbuffer[n][0], length);
+
+
+		if (!HSendPacket(servernode, true, 0, length))
+			return false;
+	}
+	return true;
 }
 
 // get request filepak and put it on the send queue
