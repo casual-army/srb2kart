@@ -37,7 +37,7 @@
 
 // Networking and tick handling related.
 #define BACKUPTICS 32
-#define MAXTEXTCMD 256
+#define MAXTEXTCMD 1024
 //
 // Packet structure
 //

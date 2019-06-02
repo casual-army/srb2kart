@@ -4455,6 +4455,11 @@ FILESTAMP
 
 				if (tic >= firstticstosend + BACKUPTICS)
 				{
+
+					CONS_Printf(M_GetText("GetPacket: Textcmd too long (max %s, used %s, mak %d, "
+						"tosend %u, node %u, player %d)\n"), sizeu1(j), sizeu2(TotalTextCmdPerTic(maketic)),
+						maketic, firstticstosend, node, netconsole);
+
 					DEBFILE(va("GetPacket: Textcmd too long (max %s, used %s, mak %d, "
 						"tosend %u, node %u, player %d)\n", sizeu1(j), sizeu2(TotalTextCmdPerTic(maketic)),
 						maketic, firstticstosend, node, netconsole));
