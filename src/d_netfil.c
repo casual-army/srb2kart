@@ -377,6 +377,7 @@ boolean Got_RequestFilePak(INT32 node)
 		if (id == 0xFF)
 			break;
 		READSTRINGN(p, wad, MAX_WADPATH);
+		CONS_Printf("Read %i %s %i\n", node, wad, id);
 		if (!SV_SendFile(node, wad, id))
 		{
 			SV_AbortSendFiles(node);
