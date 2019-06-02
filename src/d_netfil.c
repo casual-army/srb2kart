@@ -299,8 +299,9 @@ boolean CL_SendRequestFile(void)
 	
 
 
-
 	p = (char *)cmdbuffer[n][0];
+	memset(p, 0, MAXTEXTCMD + 1);
+
 	for (i = 0; i < fileneedednum; i++)
 	{
 
@@ -311,10 +312,11 @@ boolean CL_SendRequestFile(void)
 
 			if (p + 1 + length >= (char*)cmdbuffer[n][0] + MAXTEXTCMD - 1)
 			{
+				WRITEUINT8(p, 0xFF);
 				cmdbuffer[n][1][0] = (UINT8)(p - (char*)cmdbuffer[n][0]);
 				CONS_Printf("txtcmd rollover %i total length %i, written %i\n", n, p - (char*)cmdbuffer[n][0], cmdbuffer[n][1][0]);
-
 				p = (char*)cmdbuffer[++n][0];
+				memset(p, 0, MAXTEXTCMD + 1);
 			}
 
 			totalfreespaceneeded += fileneeded[i].totalsize;
@@ -330,6 +332,7 @@ boolean CL_SendRequestFile(void)
 		}
 	}
 	
+	WRITEUINT8(p, 0xFF);
 	CONS_Printf("txtcmd end %i total length %i\n", n, p - (char*)cmdbuffer[n][0]);
 	cmdbuffer[n][1][0] = (UINT8)(p - (char*)cmdbuffer[n][0]);
 
@@ -352,11 +355,15 @@ boolean CL_SendRequestFile(void)
 		length = (UINT8)cmdbuffer[n][1][0];
 
 		CONS_Printf(M_GetText("Right before memcpy. Data: c%s Length: %i\n"), (char*)cmdbuffer[n][0], length);
+
 		memcpy(p, (char*)cmdbuffer[n][0], length);
 
 
 		if (!HSendPacket(servernode, true, 0, length))
 			return false;
+
+		memset((char*)cmdbuffer[n][0], 0, MAXTEXTCMD + 1);
+
 	}
 	return true;
 }
@@ -377,7 +384,7 @@ boolean Got_RequestFilePak(INT32 node)
 		if (id == 0xFF)
 			break;
 		READSTRINGN(p, wad, MAX_WADPATH);
-		CONS_Printf("Read %i %s %i\n", node, wad, id);
+		//CONS_Printf("Read %i %s %i\n", node, wad, id);
 		if (!SV_SendFile(node, wad, id))
 		{
 			SV_AbortSendFiles(node);
