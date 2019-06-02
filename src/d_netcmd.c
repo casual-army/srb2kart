@@ -2366,13 +2366,13 @@ void D_SetupVote(void)
 		else if (i >= 3) // unknown-random and force-unknown MAP HELL
 		{
 			chance = M_RandomChance(FRACUNIT);
-			short randomgametype = gametype;
 			CONS_Printf("Chance: %i kartvoterulechanges: %i\n", chance, cv_kartvoterulechanges.value);
 			if (cv_kartvoterulechanges.value == 4 && chance)
 			{
-				randomgametype = secondgt;
+				CONS_Printf("setting encore");
+				m = G_RandMap(G_TOLFlag(secondgt), prevmap, false, (i - 2), (i < 4), votebuffer);
 			}
-			m = G_RandMap(G_TOLFlag(randomgametype), prevmap, false, (i - 2), (i < 4), votebuffer);
+			m = G_RandMap(G_TOLFlag(gametype), prevmap, false, (i - 2), (i < 4), votebuffer);
 		}
 		else
 			m = G_RandMap(G_TOLFlag(gametype), prevmap, false, 0, true, votebuffer);
