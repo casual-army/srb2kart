@@ -2074,6 +2074,7 @@ static boolean CL_ServerConnectionTicker(boolean viams, const char *tmpsave, tic
 				if (fileneeded[i].status == FS_DOWNLOADING
 					|| fileneeded[i].status == FS_REQUESTED)
 				{
+					//CONS_Printf(M_GetText("fileneedednum = %i, i=%i\n"), fileneedednum, i);
 					waitmore = true;
 					break;
 				}
@@ -3221,7 +3222,7 @@ consvar_t cv_maxsend = {"maxsend", "4096", CV_SAVE, maxsend_cons_t, NULL, 0, NUL
 consvar_t cv_noticedownload = {"noticedownload", "Off", CV_SAVE, CV_OnOff, NULL, 0, NULL, NULL, 0, 0, NULL};
 
 // Speed of file downloading (in packets per tic)
-static CV_PossibleValue_t downloadspeed_cons_t[] = {{0, "MIN"}, {32, "MAX"}, {0, NULL}};
+static CV_PossibleValue_t downloadspeed_cons_t[] = {{0, "MIN"}, {128, "MAX"}, {0, NULL}};
 consvar_t cv_downloadspeed = {"downloadspeed", "16", CV_SAVE, downloadspeed_cons_t, NULL, 0, NULL, NULL, 0, 0, NULL};
 
 static void Got_AddPlayer(UINT8 **p, INT32 playernum);
