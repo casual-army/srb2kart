@@ -304,7 +304,6 @@ boolean CL_SendRequestFile(void)
 			// put it in download dir
 			strcatbf(fileneeded[i].filename, downloaddir, "/");
 			fileneeded[i].status = FS_REQUESTED;
-			
 		}
 	WRITEUINT8(p, 0xFF);
 	I_GetDiskFreeSpace(&availablefreespace);
@@ -315,9 +314,6 @@ boolean CL_SendRequestFile(void)
 
 	// prepare to download
 	I_mkdir(downloaddir, 0755);
-
-	CONS_Printf(M_GetText("size = %i p = %s\n"), p - (char*)netbuffer->u.textcmd, p);
-
 	return HSendPacket(servernode, true, 0, p - (char *)netbuffer->u.textcmd);
 }
 
@@ -645,9 +641,7 @@ static void SV_EndFileSend(INT32 node)
 	// Indicate that the transmission is over
 	transfer[node].currentfile = NULL;
 
-	
 	filestosend--;
-	CONS_Printf(M_GetText("filestosend = %i, nextfile = %s\n"), filestosend, transfer[node].txlist->fileid);
 }
 
 #define PACKETPERTIC net_bandwidth/(TICRATE*software_MAXPACKETLENGTH)
