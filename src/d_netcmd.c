@@ -2365,8 +2365,10 @@ void D_SetupVote(void)
 			m = G_RandMap(G_TOLFlag(secondgt), prevmap, false, 0, true, votebuffer);
 		else if (i >= 3) // unknown-random and force-unknown MAP HELL
 		{
+			boolean chance = M_RandomChance(FRACUNIT / 2);
 			short randomgametype = gametype;
-			if (cv_kartvoterulechanges.value == 4 && M_RandomChance(FRACUNIT/2))
+			CONS_Printf("Chance: %i kartvoterulechanges: %i\n");
+			if (cv_kartvoterulechanges.value == 4 && chance)
 			{
 				randomgametype = secondgt;
 			}
