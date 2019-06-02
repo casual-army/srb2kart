@@ -2365,7 +2365,7 @@ void D_SetupVote(void)
 		else if (i >= 3) // unknown-random and force-unknown MAP HELL
 		{
 			short randomgametype = gametype;
-			if (cv_kartencore.value == 4 && M_RandomChance(FRACUNIT >> 2))
+			if (cv_kartencore.value == 4 && M_RandomChance(FRACUNIT/2))
 			{
 				randomgametype = secondgt;
 			}
