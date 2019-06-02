@@ -2367,7 +2367,7 @@ void D_SetupVote(void)
 		{
 			boolean chance = M_RandomChance(FRACUNIT / 2);
 			short randomgametype = gametype;
-			CONS_Printf("Chance: %i kartvoterulechanges: %i\n");
+			CONS_Printf("Chance: %i kartvoterulechanges: %i\n", chance, cv_kartvoterulechanges.value);
 			if (cv_kartvoterulechanges.value == 4 && chance)
 			{
 				randomgametype = secondgt;
