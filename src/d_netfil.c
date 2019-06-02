@@ -369,7 +369,7 @@ boolean Got_RequestFilePak(INT32 node)
 	UINT8 *p = netbuffer->u.textcmd;
 	UINT8 id;
 
-	CONS_Printf("Got_RequestFilePak from %i", node);
+	CONS_Printf("Got_RequestFilePak from %i\n", node);
 
 	while (p < netbuffer->u.textcmd + MAXTEXTCMD-1) // Don't allow hacked client to overflow
 	{
