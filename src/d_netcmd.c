@@ -2364,9 +2364,11 @@ void D_SetupVote(void)
 			m = G_RandMap(G_TOLFlag(secondgt), prevmap, false, 0, true, votebuffer);
 		else if (i >= 3) // unknown-random and force-unknown MAP HELL
 		{
+			CONS_Printf("Randomslot picked?");
 			short randomgametype = gametype;
 			if (cv_kartencore.value == 4 && M_RandomChance(FRACUNIT/2))
 			{
+				CONS_Printf("Encore chance hit!");
 				randomgametype = secondgt;
 			}
 			m = G_RandMap(G_TOLFlag(randomgametype), prevmap, false, (i - 2), (i < 4), votebuffer);

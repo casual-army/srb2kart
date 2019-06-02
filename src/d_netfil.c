@@ -300,7 +300,7 @@ boolean CL_SendRequestFile(void)
 
 
 	p = (char *)cmdbuffer[n][0];
-	memset(p, 0, MAXTEXTCMD + 1);
+	memset(p, (UINT8)0, MAXTEXTCMD + 1);
 
 	for (i = 0; i < fileneedednum; i++)
 	{
@@ -316,7 +316,7 @@ boolean CL_SendRequestFile(void)
 				cmdbuffer[n][1][0] = (UINT8)(p - (char*)cmdbuffer[n][0]);
 				CONS_Printf("txtcmd rollover %i total length %i, written %i\n", n, p - (char*)cmdbuffer[n][0], cmdbuffer[n][1][0]);
 				p = (char*)cmdbuffer[++n][0];
-				memset(p, 0, MAXTEXTCMD + 1);
+				memset(p, (UINT8)0, MAXTEXTCMD + 1);
 			}
 
 			totalfreespaceneeded += fileneeded[i].totalsize;
@@ -362,7 +362,7 @@ boolean CL_SendRequestFile(void)
 		if (!HSendPacket(servernode, true, 0, length))
 			return false;
 
-		memset((char*)cmdbuffer[n][0], 0, MAXTEXTCMD + 1);
+		memset((char*)cmdbuffer[n][0], (UINT8)0, MAXTEXTCMD + 1);
 
 	}
 	return true;
