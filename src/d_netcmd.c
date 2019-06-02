@@ -2349,7 +2349,7 @@ void D_SetupVote(void)
 	INT32 i;
 	UINT8 secondgt = G_SometimesGetDifferentGametype();
 	INT16 votebuffer[3] = {-1,-1,-1};
-	boolean encorepossible = (M_SecretUnlocked(SECRET_ENCORE) && G_RaceGametype());
+	boolean chance = false;
 
 	if (cv_kartencore.value && G_RaceGametype())
 		WRITEUINT8(p, (gametype|0x80));
@@ -2365,7 +2365,7 @@ void D_SetupVote(void)
 			m = G_RandMap(G_TOLFlag(secondgt), prevmap, false, 0, true, votebuffer);
 		else if (i >= 3) // unknown-random and force-unknown MAP HELL
 		{
-			boolean chance = M_RandomChance(FRACUNIT / 2);
+			chance = M_RandomChance(FRACUNIT);
 			short randomgametype = gametype;
 			CONS_Printf("Chance: %i kartvoterulechanges: %i\n", chance, cv_kartvoterulechanges.value);
 			if (cv_kartvoterulechanges.value == 4 && chance)
