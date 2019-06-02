@@ -2369,7 +2369,6 @@ void D_SetupVote(void)
 			CONS_Printf("Chance: %i kartvoterulechanges: %i\n", chance, cv_kartvoterulechanges.value);
 			if (cv_kartvoterulechanges.value == 4 && chance)
 			{
-				CONS_Printf("setting encore");
 				m = G_RandMap(G_TOLFlag(secondgt), prevmap, false, (i - 2), (i < 4), votebuffer);
 			}
 			m = G_RandMap(G_TOLFlag(gametype), prevmap, false, (i - 2), (i < 4), votebuffer);
@@ -2644,8 +2643,8 @@ static void Got_Mapcmd(UINT8 **cp, INT32 playernum)
 
 	if (!skipprecutscene)
 	{
-		DEBFILE(va("Warping to %s [resetplayer=%d lastgametype=%d gametype=%d cpnd=%d]\n",
-			mapname, resetplayer, lastgametype, gametype, chmappending));
+		CONS_Printf("Warping to %s [resetplayer=%d lastgametype=%d gametype=%d cpnd=%d]\n",
+			mapname, resetplayer, lastgametype, gametype, chmappending);
 		CON_LogMessage(M_GetText("Speeding off to level...\n"));
 	}
 
