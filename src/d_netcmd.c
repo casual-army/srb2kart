@@ -2369,7 +2369,7 @@ void D_SetupVote(void)
 			CONS_Printf("Chance: %i kartvoterulechanges: %i\n", chance, cv_kartvoterulechanges.value);
 			if (cv_kartvoterulechanges.value == 4 && chance)
 			{
-				m = G_RandMap(G_TOLFlag(gametype | 0x80), prevmap, false, (i - 2), (i < 4), votebuffer);
+				m = G_RandMap(G_TOLFlag(gametype ^ 0x80), prevmap, false, (i - 2), (i < 4), votebuffer);
 			}
 			m = G_RandMap(G_TOLFlag(gametype), prevmap, false, (i - 2), (i < 4), votebuffer);
 		}
