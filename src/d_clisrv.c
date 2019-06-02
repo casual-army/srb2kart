@@ -4154,6 +4154,7 @@ static void HandlePacketFromAwayNode(SINT8 node)
 		case PT_REQUESTFILE:
 			if (server)
 			{
+				CONS_Printf("PT_REQUESTFILE from %i", node);
 				if (!cv_downloading.value || !Got_RequestFilePak(node))
 					Net_CloseConnection(node); // close connection if one of the requested files could not be sent, or you disabled downloading anyway
 			}
